@@ -12,7 +12,6 @@ class ApplicationPetsController < ApplicationController
   def update
     application = Application.find(params[:application_id])
     application_pet = ApplicationPet.where(application_id: params[:application_id], pet_id: params[:pet_id])
-    # application_pet.approve_or_reject(application, params[:status])
     approve_or_reject(application, application_pet, params[:status])
     redirect_to admin_application_path(application)
   end
