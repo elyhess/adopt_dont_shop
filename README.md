@@ -46,7 +46,7 @@
 * Built out CRUD functionality for a many to many relationship
 * Used ActiveRecord to write queries that join multiple tables of data together
 * Used MVC to organize code effectively, limiting the amount of logic included in views and controllers
-* Validation of models sad path handling
+* Validation of models & sad path handling
 * Use of flash messages to give feedback to the user
 * Use of partials in views
 * Use of `within` blocks in tests
@@ -54,7 +54,7 @@
 
 <!-- PROJECT BOARD -->
 ## Project Board
-[project board](https://github.com/elyhess/adopt_dont_shop/projects/2) for a complete list of features / user stories used to develop this application.
+Check out [project board](https://github.com/elyhess/adopt_dont_shop/projects/2) for a complete list of features / user stories used to develop this application.
 
 <!-- DATABBASE SCHEMA -->
 ## Database Schema
