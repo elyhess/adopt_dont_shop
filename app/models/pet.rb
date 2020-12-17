@@ -7,9 +7,10 @@ class Pet < ApplicationRecord
               greater_than_or_equal_to: 0
             }
   enum sex: [:female, :male]
-  
+  scope :adoptable, ->(n = true) { where('adoptable = ?', n)}
+
   def self.search_pet_by_name(pet_name)
-    where("lower(name) like ?", "%#{pet_name.downcase}%").where(adoptable: true)
+    where("lower(name) like ?", "%#{pet_name.downcase}%").adoptable
   end
 
   def self.make_adopted
@@ -21,11 +22,11 @@ class Pet < ApplicationRecord
   end
 
   def self.adoptable_count
-    where(adoptable: true).count
+    adoptable.count
   end
 
   def self.adopted_count
-    where(adoptable: false).count
+    adoptable(false).count
   end
 
   def self.action_required
