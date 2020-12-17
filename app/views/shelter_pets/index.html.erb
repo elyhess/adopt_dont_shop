@@ -1,8 +1,10 @@
 <h1><%= link_to "#{@shelter.name}", "/shelters/#{@shelter.id}" %>'s Pets</h1>
 <%= link_to "Add Pet", "/shelters/#{@shelter.id}/pets/new" %><br>
 <% @shelter.pets.each do |pet| %>
-<h2>Name:<%= link_to "#{pet.name}", "pets/#{pet.id}" %></h2>
-  <%= image_tag "#{pet.image}" %><br>
-  Approx Age:<%= pet.approximate_age %><br>
-  Sex:<%= pet.sex %><br>
+  <% if pet.adoptable == true %>
+    <h2>Name:<%= link_to "#{pet.name}", pet_path(pet.id) %></h2>
+      <%= image_tag "#{pet.image}", :size => '200x200' %><br>
+      Approx Age:<%= pet.approximate_age %><br>
+      Sex:<%= pet.sex %><br>
+  <% end %>
 <% end %>

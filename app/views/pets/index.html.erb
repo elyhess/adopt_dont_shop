@@ -4,7 +4,7 @@
   <% if pet.adoptable == true %>
   <section id="pet-<%=pet.id%>">
       <h2>name: <%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h2>
-      <%= image_tag "#{pet.image}" %><br>
+      <%= image_tag "#{pet.image}", :size => '200x200' %><br>
       approx age: <%= pet.approximate_age %><br>
       sex: <%= pet.sex%><br>
       shelter: <%= link_to "#{pet.shelter.name}", "shelters/#{pet.shelter.id}" %><br>

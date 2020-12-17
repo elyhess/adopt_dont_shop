@@ -1,6 +1,6 @@
 
 <h2>Name: <%= "#{@pet.name}" %></h2>
-<%= image_tag "#{@pet.image}" %><br>
+<%= image_tag "#{@pet.image}", :size => '200x200' %><br>
 Description: <%= @pet.description %><br>
 Approx Age: <%= @pet.approximate_age %><br>
 Sex: <%= @pet.sex %><br>
