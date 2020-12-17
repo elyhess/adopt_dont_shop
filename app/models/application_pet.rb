@@ -16,5 +16,19 @@ class ApplicationPet < ApplicationRecord
   def self.any_pets_rejected?(application_id)
     find_applications(application_id).is_rejected.count >= 1
   end
-  
+
+  # def self.approve_or_reject(application, status)
+  #   if status == "Approved"
+  #     update(status: "Approved")
+  #     if all_pets_approved?(application.id)
+  #       application.approval
+  #     end
+  #   elsif status == "Rejected" 
+  #     update(status: "Rejected")
+  #     if any_pets_rejected?(application.id)
+  #       application.rejection
+  #     end
+  #   end
+  # end
+
 end
