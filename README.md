@@ -105,7 +105,7 @@ Ely Hess - Ely.hess@Me.com
 ## Acknowledgements
 
 * [README template](https://github.com/othneildrew/Best-README-Template)
-* [Turing School of Software & Desion Project Repo](https://github.com/turingschool-examples/adopt_dont_shop)
+* [Turing School of Software & Design Project Repo](https://github.com/turingschool-examples/adopt_dont_shop)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
