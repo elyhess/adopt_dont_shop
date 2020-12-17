@@ -22,12 +22,12 @@ end
 private
 
 def approve_or_reject(application, application_pet, status)
-  if params[:status] == "Approved"
+  if status == "Approved"
     application_pet.update(status: "Approved")
     if ApplicationPet.all_pets_approved?(application.id)
       application.approval
     end
-  elsif params[:status] == "Rejected" 
+  elsif status == "Rejected" 
     application_pet.update(status: "Rejected")
     if ApplicationPet.any_pets_rejected?(application.id)
       application.rejection
