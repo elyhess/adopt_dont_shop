@@ -35,4 +35,13 @@ class Application < ApplicationRecord
     application_pets.find_by(pet_id: pet_id).status
   end
 
+  def approval
+    pets.make_adopted
+    update(application_status: "Approved")
+  end
+  
+  def rejection
+    update(application_status: "Rejected")
+  end
+
 end
