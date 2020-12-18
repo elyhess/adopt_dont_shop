@@ -11,25 +11,9 @@ class ApplicationPetsController < ApplicationController
 
   def update
     application = Application.find(params[:application_id])
-    application_pet = ApplicationPet.where(application_id: params[:application_id], pet_id: params[:pet_id])
-    approve_or_reject(application, application_pet, params[:status])
+    application_pets = ApplicationPet.where(application_id: params[:application_id])
+    application_pets.approve_or_reject(application, params)
     redirect_to admin_application_path(application)
   end
 
-end
-
-private
-
-def approve_or_reject(application, application_pet, status)
-  if status == "Approved"
-    application_pet.update(status: "Approved")
-    if ApplicationPet.all_pets_approved?(application.id)
-      application.approval
-    end
-  elsif status == "Rejected" 
-    application_pet.update(status: "Rejected")
-    if ApplicationPet.any_pets_rejected?(application.id)
-      application.rejection
-    end
-  end
 end
