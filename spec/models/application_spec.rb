@@ -95,5 +95,13 @@ describe Application, type: :model do
       expect(@abby.pet_status(@pet1.id)).to eq("Approved")
       expect(@frank.pet_status(@pet7.id)).to eq("Rejected")
     end
+
+    it '#approval' do
+      expect(@abby.approval).to eq(true)
+    end
+
+    it '#rejection' do
+      expect(@abby.rejection).to eq(true)
+    end
   end
 end
