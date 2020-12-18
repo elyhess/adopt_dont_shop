@@ -45,16 +45,22 @@ describe ApplicationPet, type: :model do
 
       ApplicationPet.create!(application: @frank, pet: @pet5, status: "Approved")
       ApplicationPet.create!(application: @frank, pet: @pet6, status: "Approved")
-      ApplicationPet.create!(application: @frank, pet: @pet7, status: "Rejected")
+      @a = ApplicationPet.create!(application: @frank, pet: @pet7, status: "Rejected")
     end
-    it ".all_pets_approved?" do
-      expect(ApplicationPet.all_pets_approved?(@abby.id)).to eq(true)
-      expect(ApplicationPet.all_pets_approved?(@frank.id)).to eq(false)
+    
+    it '.any_pets_rejected?' do
+      expect(ApplicationPet.any_pets_rejected?).to eq(true)
     end
 
-    it '.any_pets_rejected?' do
-      expect(ApplicationPet.any_pets_rejected?(@abby.id)).to eq(false)
-      expect(ApplicationPet.any_pets_rejected?(@frank.id)).to eq(true)
+    it ".all_pets_approved?" do
+      expect(ApplicationPet.all_pets_approved?).to eq(false)
+      @a.update(status: "Approved")
+      expect(ApplicationPet.all_pets_approved?).to eq(true)
+    end
+
+    it '.approve_or_reject' do
+      approve_or_rejects = ApplicationPet.approve_or_reject(@abby, {application_id: @abby.id, pet_id: @pet1.id, status: "Rejected"})
+      expect(@abby.application_status).to eq("Rejected")
     end
   end
 end
