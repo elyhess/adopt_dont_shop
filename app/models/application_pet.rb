@@ -18,7 +18,6 @@ class ApplicationPet < ApplicationRecord
 
   def self.approve_or_reject(application, params)
     if params[:status] == "Approved"
-      require "pry"; binding.pry
       find_application_pet(params[:application_id], params[:pet_id]).update(status: "Approved")
       if self.all_pets_approved?
         application.approval
