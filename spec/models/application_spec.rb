@@ -97,11 +97,15 @@ describe Application, type: :model do
     end
 
     it '#approval' do
-      expect(@abby.approval).to eq(true)
+      @abby.approval
+      expect(@pet1.reload.adoptable).to eq(false)
+      expect(@pet2.reload.adoptable).to eq(false)
+      expect(@pet3.reload.adoptable).to eq(false)
     end
 
     it '#rejection' do
-      expect(@abby.rejection).to eq(true)
+      @abby.rejection
+      expect(@abby.application_status).to eq("Rejected")
     end
   end
 end
