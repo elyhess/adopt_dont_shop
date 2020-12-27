@@ -96,6 +96,7 @@ describe Pet, type: :model do
       pet5 = shelter.pets.create!(sex: :female, name: "lena", approximate_age: 6, description: "sort of cute")
       pet6 = shelter.pets.create!(sex: :male, name: "ed", approximate_age: 1, description: "scruffy cute")
       pet7 = shelter2.pets.create!(sex: :female, name: "fark", approximate_age: 2, description: "mega cute")
+      user1= User.create(username: "x", password: "admin", role: 0)
 
       poe = Application.create!(name: "Poe",
                                  street: "666 18th st.",
@@ -103,7 +104,7 @@ describe Pet, type: :model do
                                  state: "CO",
                                  zip_code: 80511,
                                  application_status: "Pending",
-                                 description: "I want these pets.")
+                                 description: "I want these pets.", user_id: user1.id)
 
       bob = Application.create!(name: "bob",
                                  street: "1231 6th st.",
@@ -111,7 +112,9 @@ describe Pet, type: :model do
                                  state: "CO",
                                  zip_code: 82111,
                                  application_status: "Pending",
-                                 description: "I want these pets.")
+                                 description: "I want these pets.", user_id: user1.id)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user1)
 
       ApplicationPet.create!(application: bob, pet: pet5, status: "In Progress")
       ApplicationPet.create!(application: bob, pet: pet6, status: "In Progress")

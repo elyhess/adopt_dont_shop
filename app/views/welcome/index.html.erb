@@ -1,1 +1,10 @@
 <h1>Welcome to Adopt Don't Shop</h1>
+
+<% if current_admin? %>
+  <%= link_to 'Admin Dashboard', admin_shelters_path %>
+<% elsif current_user %>
+  <h3>Applications:</h3>
+  <% current_user.applications.each do |application| %>
+    <p><%= link_to application.name, application_path(application) %> - <%= application.application_status %></p>
+  <% end %>
+<% end %>

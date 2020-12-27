@@ -37,22 +37,26 @@ describe "As a visitor" do
                                       description: "likes barking",
                                       image: "image_2.png")
 
+      @user1= User.create(username: "x", password: "admin", role: 0)
+
       @bobby = Application.create!(name: "Bobby",
                                    street: "756 6th st.",
                                    city: "Boulder",
                                    state: "CO",
                                    zip_code: 80302,
-                                   application_status: "In Progress")
+                                   application_status: "In Progress", user_id: @user1.id)
 
       @sam = Application.create!(name: "Sam",
                                  street: "756 6th st.",
                                  city: "Boulder",
                                  state: "CO",
                                  zip_code: 80302,
-                                 application_status: "In Progress")
+                                 application_status: "In Progress", user_id: @user1.id)
 
       ApplicationPet.create!(application: @bobby, pet: @pet3)
       ApplicationPet.create!(application: @bobby, pet: @pet2)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
     end
 
     it "I see the attributes of my application" do

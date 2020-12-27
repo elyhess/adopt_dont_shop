@@ -4,6 +4,8 @@ RSpec.describe 'Create Shelter from index page' do
   before :each do
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
     @shelter2 = Shelter.create!(name: "Silly Shelter", address: "123 Silly Ave", city: "Denver", state: "CO", zip: 80012)
+    @user1= User.create(username: "x", password: "admin", role: 1)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
   end
 
   it "Visitor can create a new shelter" do

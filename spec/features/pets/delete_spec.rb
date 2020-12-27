@@ -8,6 +8,8 @@ RSpec.describe 'Delete pet from pet show page' do
     @pet1 = @shelter1.pets.create!(image:"", name: "Thor", description: "dog", approximate_age: 2, sex: "male")
     @pet2 = @shelter2.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
     @pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
+    @user1= User.create(username: "x", password: "admin", role: 1)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
   end
 
   it "can delete a pet from the pet show page" do

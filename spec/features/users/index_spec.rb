@@ -76,6 +76,25 @@ describe 'As a user' do
     
       expect(page).to have_content("Incorrect Information.")
     end
+
+    it "I can logout" do
+      user = User.create(username: "funbucket13", password: "test")
+    
+      visit root_path
+    
+      click_on "Sign In"
+    
+      fill_in :username, with: user.username
+      fill_in :password, with: user.password
+    
+      click_on "Log In"
+
+      click_on "Log Out"
+    
+      expect(current_path).to eq(root_path)
+    
+      expect(page).to have_content("You are logged out!")
+    end
   end
 end
 
