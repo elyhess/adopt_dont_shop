@@ -69,22 +69,5 @@ RSpec.describe 'Shelters index page' do
       end
       expect(page).to_not have_content("Poo and Paws")
   end
-
-  it 'Sign up and login as a user' do
-    visit root_path
-
-    click_on "Sign Up"
-
-    expect(current_path).to eq(new_user_path)
-
-    username = "funbucket13"
-    password = "test"
-
-    fill_in :username, with: username
-    fill_in :password, with: password
-
-    click_on "Create User"
-
-    expect(page).to have_content("Welcome, #{username}!")
-  end
+  
 end
