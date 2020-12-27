@@ -18,4 +18,10 @@ Rails.application.routes.draw do
     resources :shelters, controller: "admin_shelters", only: [:index, :show]
   end
 
+  resources :users, except: [:show]
+  get '/profile', to: 'users#show', as: :profile
+
+  get '/login', to: 'sessions#new', as: :login
+  post '/login', to: 'sessions#create'
+  delete '/login', to: 'sessions#destroy'
 end

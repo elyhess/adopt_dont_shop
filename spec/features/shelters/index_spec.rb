@@ -69,4 +69,5 @@ RSpec.describe 'Shelters index page' do
       end
       expect(page).to_not have_content("Poo and Paws")
   end
+  
 end
