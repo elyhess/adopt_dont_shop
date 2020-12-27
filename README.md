@@ -47,10 +47,13 @@
 * Used ActiveRecord to write queries that join multiple tables of data together
 * Used MVC to organize code effectively, limiting the amount of logic included in views and controllers
 * Validation of models & sad path handling
-* Use of flash messages to give feedback to the user
-* Use of partials in views
-* Use of `within` blocks in tests
-* Deployment of application to [Heroku](https://fathomless-inlet-21274.herokuapp.com/)
+* Used flash messages to give feedback to the user
+* Used partials in views to DRY up code
+* Used `within` blocks in tests for more accurate feature testing
+* Deploymed application to [Heroku](https://fathomless-inlet-21274.herokuapp.com/)
+* Implemented user sessions & account roles
+* Used callbacks and helper methods to limit views depending on user roles
+
 
 <!-- PROJECT BOARD -->
 ## Project Board
@@ -59,7 +62,7 @@ Check out [project board](https://github.com/elyhess/adopt_dont_shop/projects/2)
 <!-- DATABBASE SCHEMA -->
 ## Database Schema
 <p align="center">
-  <img src="https://github.com/elyhess/adopt_dont_shop/blob/main/schema.png" />
+  <img src="https://github.com/elyhess/adopt_dont_shop/blob/main/schema1.png" />
 </p>
 
 <!-- BUILT WITH -->
