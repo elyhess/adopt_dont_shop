@@ -18,4 +18,6 @@ Rails.application.routes.draw do
     resources :shelters, controller: "admin_shelters", only: [:index, :show]
   end
 
+  resources :users
+
 end
