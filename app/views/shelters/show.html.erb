@@ -4,5 +4,8 @@
 <%= @shelter.state %>
 <%= @shelter.zip %><br>
 <%= link_to "#{@shelter.name}'s Pets", "/shelters/#{@shelter.id}/pets" %><br>
-<a href="/shelters/<%= @shelter.id %>/edit">Edit Shelter</a>
-<%= button_to "Delete Shelter", "/shelters/#{@shelter.id}", method: :delete %>
+
+<% if current_admin? %>
+  <a href="/shelters/<%= @shelter.id %>/edit">Edit Shelter</a>
+  <%= button_to "Delete Shelter", "/shelters/#{@shelter.id}", method: :delete %>
+<% end %>

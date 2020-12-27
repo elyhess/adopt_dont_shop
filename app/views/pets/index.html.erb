@@ -1,5 +1,11 @@
 <h1>All Pets</h1>
-<%= link_to 'Start an Application', new_application_path %>
+
+<% if current_user %>
+  <%= link_to 'Start an Application', new_application_path %>
+<% else %>
+  <%= link_to 'Sign Up To Adopt', new_user_path %>
+<% end %>
+
 <% @pets.each do |pet| %>
   <% if pet.adoptable == true %>
   <section id="pet-<%=pet.id%>">
@@ -8,8 +14,12 @@
       approx age: <%= pet.approximate_age %><br>
       sex: <%= pet.sex%><br>
       shelter: <%= link_to "#{pet.shelter.name}", "shelters/#{pet.shelter.id}" %><br>
-      <a href="/pets/<%= pet.id %>/edit">Update Pet</a>
-      <%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %><br>
+
+      <% if current_admin? %>
+        <%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %><br>
+        <a href="/pets/<%= pet.id %>/edit">Update Pet</a>
+      <% end %>
+
     </section>
   <% end %>
 <% end %>
