@@ -36,6 +36,8 @@ describe "As a visitor" do
                                       approximate_age: 3,
                                       description: "likes barking",
                                       image: "image_2.png")
+      @user = User.create(username: "adminasdasdasdasda", password: "admiasdan", role: 1)
+      @user1 = User.create(username: "defxxxxxxxxxxault", password: "default", role: 0)
 
       @bobby = Application.create!(name: "Bobby",
                                    street: "756 6th st.",
@@ -43,19 +45,24 @@ describe "As a visitor" do
                                    state: "CO",
                                    zip_code: 80302,
                                    application_status: "Pending",
-                                   description: "I really want these pets.")
+                                   description: "I really want these pets.",
+                                   user_id: @user1.id)
       @abby = Application.create!(name: "Abby",
                                   street: "2222 6th st.",
                                   city: "Denver",
                                   state: "CO",
                                   zip_code: 80214,
                                   application_status: "Pending",
-                                  description: "I want these pets.")
+                                  description: "I want these pets.",
+                                  user_id: @user1.id)
 
       ApplicationPet.create!(application: @bobby, pet: @pet3)
       ApplicationPet.create!(application: @bobby, pet: @pet2)
       ApplicationPet.create!(application: @abby, pet: @pet1)
       ApplicationPet.create!(application: @abby, pet: @pet4)
+
+      # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
     it "I can approve a pet for adoption" do
@@ -133,25 +140,32 @@ describe "As a visitor" do
                                       approximate_age: 3,
                                       description: "likes barking",
                                       image: "image_2.png")
+
+      user = User.create!(username: "123123123", password: "12312312", role: 1)
+      user1 = User.create!(username: "defau12312312lt", password: "123123", role: 0)
       applicant1 = Application.create!(name: "Bobby",
                                         street: "756 6th st.",
                                         city: "Boulder",
                                         state: "CO",
                                         zip_code: 80302,
                                         application_status: "Pending",
-                                        description: "I really want these pets.")
+                                        description: "I really want these pets.", user_id: user1.id)
+
       applicant2 = Application.create!(name: "Abby",
                                         street: "2222 6th st.",
                                         city: "Denver",
                                         state: "CO",
                                         zip_code: 80214,
                                         application_status: "Pending",
-                                        description: "I want these pets.")
+                                        description: "I want these pets.", user_id: user1.id)
 
       ApplicationPet.create!(application: applicant1, pet: pet3)
       ApplicationPet.create!(application: applicant1, pet: pet2)
       ApplicationPet.create!(application: applicant2, pet: pet1)
       ApplicationPet.create!(application: applicant2, pet: pet3)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user1)
 
       visit admin_application_path(applicant1)
 

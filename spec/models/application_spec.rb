@@ -21,18 +21,19 @@ describe Application, type: :model do
       @pet1 = @shelter.pets.create!(sex: :female, name: "Fluffy", approximate_age: 3, description: "super cute")
       @pet2 = @shelter.pets.create!(sex: :female, name: "Floppy", approximate_age: 3, description: "super cute")
       @pet3 = @shelter.pets.create!(sex: :female, name: "Borko", approximate_age: 3, description: "super cute")
-
+      
       @pet5 = @shelter.pets.create!(sex: :female, name: "lena", approximate_age: 6, description: "sort of cute")
       @pet6 = @shelter.pets.create!(sex: :male, name: "ed", approximate_age: 1, description: "scruffy cute")
       @pet7 = @shelter.pets.create!(sex: :female, name: "fark", approximate_age: 2, description: "mega cute")
-
+      @user1= User.create(username: "x", password: "admin", role: 0)
+      
       @abby = Application.create!(name: "Abby",
                                   street: "2222 6th st.",
                                   city: "Denver",
                                   state: "CO",
                                   zip_code: 80214,
                                   application_status: "Approved",
-                                  description: "I want these pets.")
+                                  description: "I want these pets.", user_id: @user1.id)
 
       @frank = Application.create!(name: "Abby",
                                    street: "2222 6th st.",
@@ -40,7 +41,7 @@ describe Application, type: :model do
                                    state: "CO",
                                    zip_code: 80214,
                                    application_status: "Rejected",
-                                   description: "I want these pets.")
+                                   description: "I want these pets.", user_id: @user1.id)
 
       @poe = Application.create!(name: "Poe",
                                  street: "666 18th st.",
@@ -48,7 +49,7 @@ describe Application, type: :model do
                                  state: "CO",
                                  zip_code: 80511,
                                  application_status: "Pending",
-                                 description: "I want these pets.")
+                                 description: "I want these pets.", user_id: @user1.id)
 
       @bob = Application.create!(name: "bob",
                                  street: "1231 6th st.",
@@ -56,7 +57,7 @@ describe Application, type: :model do
                                  state: "CO",
                                  zip_code: 82111,
                                  application_status: "In Progress",
-                                 description: "I want these pets.")
+                                 description: "I want these pets.", user_id: @user1.id)
 
       ApplicationPet.create!(application: @abby, pet: @pet1, status: "Approved")
       ApplicationPet.create!(application: @abby, pet: @pet2, status: "Approved")
@@ -65,6 +66,8 @@ describe Application, type: :model do
       ApplicationPet.create!(application: @frank, pet: @pet5, status: "Approved")
       ApplicationPet.create!(application: @frank, pet: @pet6, status: "Approved")
       ApplicationPet.create!(application: @frank, pet: @pet7, status: "Rejected")
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
     end
     it "#in_progress?" do
       expect(@bob.in_progress?).to eq(true)

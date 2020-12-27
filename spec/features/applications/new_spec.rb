@@ -30,6 +30,10 @@ describe 'As a visitor' do
                                       approximate_age: 3,
                                       description: "likes barking",
                                       image: "image_2.png")
+
+
+      @user1= User.create(username: "xxxxxxxxxxxx", password: "admin", role: 0)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
     end
 
     it 'I can submit an application with valid data' do
@@ -43,7 +47,7 @@ describe 'As a visitor' do
       select "NY", from: "state"
       fill_in "zip_code", with: "80302"
       click_button "Submit"
-
+      
       expect(current_path).to eq(application_path(Application.last.id))
      
       visit pets_path

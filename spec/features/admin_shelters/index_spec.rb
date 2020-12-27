@@ -11,6 +11,9 @@ describe 'As a visitor' do
       @pet2 = @shelter2.pets.create!(sex: :female, name: "z", approximate_age: 3, description: "super cute")
       @pet3 = @shelter2.pets.create!(sex: :female, name: "y", approximate_age: 3, description: "super cute")
       @pet4 = @shelter3.pets.create!(sex: :male, name: "x", approximate_age: 3, description: "super cute")
+      
+      @user = User.create(username: "admin_name_something", password: "admin", role: 1)
+      @user1 = User.create(username: "default_name_something", password: "admin", role: 0)
 
       @frank = Application.create!(name: "Frank",
                                   street: "2222 6th st.",
@@ -18,7 +21,7 @@ describe 'As a visitor' do
                                   state: "CO",
                                   zip_code: 80214,
                                   application_status: "Pending",
-                                  description: "I want these pets.")
+                                  description: "I want these pets.", user_id: @user1.id)
 
       @linda = Application.create!(name: "linda",
                                   street: "2222 6th st.",
@@ -26,12 +29,14 @@ describe 'As a visitor' do
                                   state: "CO",
                                   zip_code: 80214,
                                   application_status: "Approved",
-                                  description: "I want these pets.")
+                                  description: "I want these pets.", user_id: @user1.id)
 
       @app_pet1 = ApplicationPet.create!(application: @linda, pet: @pet1, status: "Approved")
       @app_pet2 = ApplicationPet.create!(application: @linda, pet: @pet2, status: "Approved")
       @app_pet3 = ApplicationPet.create!(application: @frank, pet: @pet3, status: "Pending")
       @app_pet4 = ApplicationPet.create!(application: @frank, pet: @pet4, status: "Pending")
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
     it 'Then I see all Shelters in the system listed in reverse alphabetical order by name' do

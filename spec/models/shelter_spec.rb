@@ -28,13 +28,15 @@ describe Shelter, type: :model do
       pet2 = shelter2.pets.create!(sex: :female, name: "Floppy", approximate_age: 3, description: "super cute")
       pet3 = shelter2.pets.create!(sex: :female, name: "Borko", approximate_age: 3, description: "super cute")
 
+      user1= User.create(username: "x", password: "admin", role: 0)
+
       frank = Application.create!(name: "Frank",
                                   street: "2222 6th st.",
                                   city: "Denver",
                                   state: "CO",
                                   zip_code: 80214,
                                   application_status: "Pending",
-                                  description: "I want these pets.")
+                                  description: "I want these pets.", user_id: user1.id)
 
       linda = Application.create!(name: "linda",
                                   street: "2222 6th st.",
@@ -42,8 +44,9 @@ describe Shelter, type: :model do
                                   state: "CO",
                                   zip_code: 80214,
                                   application_status: "Pending",
-                                  description: "I want these pets.")
+                                  description: "I want these pets.", user_id: user1.id)
 
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user1)
       app_pet1 = ApplicationPet.create!(application: linda, pet: pet1, status: "Pending")
       app_pet2 = ApplicationPet.create!(application: linda, pet: pet2, status: "Pending")
       app_pet3 = ApplicationPet.create!(application: frank, pet: pet3, status: "Pending")
