@@ -46,6 +46,8 @@ describe "As a visitor" do
                                    state: "CO",
                                    zip_code: 80302,
                                    application_status: "In Progress", user_id: @user1.id)
+                                   
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
     end
 
     it 'I see can add a pet to my application' do
