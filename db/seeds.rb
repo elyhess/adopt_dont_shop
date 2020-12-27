@@ -10,6 +10,7 @@
 
 Shelter.destroy_all
 Pet.destroy_all
+User.destroy_all
 
 Application.destroy_all
 ApplicationPet.destroy_all
@@ -95,3 +96,7 @@ pet10 = shelter_1.pets.create!(name: "Penelope",
                                approximate_age: 9,
                                description: "likes rolling around",
                                image: "image_10.png")
+
+user1 = User.create(username: "abc", password: "abc", role: 0)
+user1 = User.create(username: "xxx", password: "xxx", role: 0)
+user1 = User.create(username: "admin", password: "admin", role: 1)
